@@ -1,0 +1,114 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+button {
+  color: inherit;
+}
+button {
+  cursor: pointer;
+}
+
+.chat-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mb-1rem {
+  margin-bottom: 1rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.chat-app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.chat-contacts {
+  width: 20%;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.chat-messages-area {
+  width: 80%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chat-message {
+  margin: 0.5rem 0;
+}
+
+.chat-message-left {
+  text-align: left;
+}
+
+.chat-message-right {
+  text-align: right;
+}
+
+.chat-bubble {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.chat-bubble-left {
+  background: #eee;
+}
+
+.chat-bubble-right {
+  background: #acf;
+}
+
+.chat-input {
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.addContact-button {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Verdana;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+}
+.addContact-button:hover {
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	background-color:#e9e9e9;
+}
+.addContact-button:active {
+	position:relative;
+	top:1px;
+}
+
+.addContact2 {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  width: 100%;
+}
