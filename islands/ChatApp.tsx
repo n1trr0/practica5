@@ -14,7 +14,7 @@ export default function ChatApp({ contacts }: Props) {
         .then((res) => res.json())
         .then((data) => setMessages(data.data || []));
     }
-  });
+  }, [activeChatId.value]);
 
   const handleKeyDown = async (e: KeyboardEvent) => {
     if (e.key === "Enter" && inputValue.trim() !== "" && activeChatId.value) {
