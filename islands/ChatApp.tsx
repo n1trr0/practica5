@@ -34,6 +34,9 @@ export default function ChatApp({ contacts }: Props) {
 
         if (res.ok) {
           setInputValue("");
+          const updated = await fetch(`https://back-a-p4.onrender.com/messages/chat/${activeChatId.value}`);
+          const updatedData = await updated.json();
+          setMessages(updatedData.data || []);
         }
       } catch (err) {
         console.error("Error de red:", err);
