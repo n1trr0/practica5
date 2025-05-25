@@ -1,4 +1,4 @@
-import { Contact } from "../components/types.ts";
+import { Contact } from "../static/types.ts";
 
 export type Props = {
     contacts: Contact[];

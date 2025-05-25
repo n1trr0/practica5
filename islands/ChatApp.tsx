@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { useEffect, useState } from "preact/hooks";
 import ChatList from "./ChatList.tsx";
-import { Message, Props } from "../components/types.ts";
+import { Message, Props } from "../static/types.ts";
 
 export default function ChatApp({ contacts }: Props) {
   const activeChatId = useSignal<string | null>(null);
@@ -14,13 +14,13 @@ export default function ChatApp({ contacts }: Props) {
         .then((res) => res.json())
         .then((data) => setMessages(data.data || []));
     }
-  }, [activeChatId.value]);
+  });
 
   const handleKeyDown = async (e: KeyboardEvent) => {
     if (e.key === "Enter" && inputValue.trim() !== "" && activeChatId.value) {
       const newMessage = {
         chatId: activeChatId.value,
-        isContactMessage: false, // o true si simula el contacto
+        isContactMessage: false,
         content: inputValue.trim(),
         timestamp: new Date().toISOString(),
       };
@@ -34,9 +34,6 @@ export default function ChatApp({ contacts }: Props) {
 
         if (res.ok) {
           setInputValue("");
-          const updated = await fetch(`https://back-a-p4.onrender.com/messages/chat/${activeChatId.value}`);
-          const updatedData = await updated.json();
-          setMessages(updatedData.data || []);
         }
       } catch (err) {
         console.error("Error de red:", err);
@@ -50,10 +47,7 @@ export default function ChatApp({ contacts }: Props) {
       <div className="chat-contacts">
         <a href="/addContact"><button type="submit" className="addContact-button">Añadir contacto</button></a>
         <h2>Contactos</h2>
-        <ChatList
-          contacts={contacts}
-          onSelect={(chatId) => (activeChatId.value = chatId)}
-        />
+        <ChatList contacts={contacts} onSelect={(chatId) => (activeChatId.value = chatId)}/>
       </div>
 
       <div className="chat-messages-area">
@@ -61,31 +55,16 @@ export default function ChatApp({ contacts }: Props) {
           <>
             <div className="chat-messages-container">
               {messages.map((msg) => (
-                <div
-                  key={msg._id}
-                  className={`chat-message ${
-                    msg.isContactMessage ? "chat-message-left" : "chat-message-right"}`}
-                >
-                  <span className={`chat-bubble ${
-                      msg.isContactMessage ? "chat-bubble-left" : "chat-bubble-right"}`}
-                  >
-                    {msg.content}
-                  </span>
+                <div key={msg._id} className={`chat-message ${msg.isContactMessage ? "chat-message-left" : "chat-message-right"}`}>
+                  <span className={`chat-bubble ${msg.isContactMessage ? "chat-bubble-left" : "chat-bubble-right"}`}>{msg.content}</span>
                 </div>
               ))}
             </div>
-            <input
-              type="text"
-              value={inputValue}
-              onInput={(e) => setInputValue(e.currentTarget.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Escribe un mensaje..."
-              className="chat-input"
-            />
+
+            <input type="text" value={inputValue} onInput={(e) => setInputValue(e.currentTarget.value)}
+              onKeyDown={handleKeyDown} placeholder="Escribe un mensaje..." className="chat-input"/>
           </>
-        ) : (
-          <p>Selecciona un contacto para comenzar a chatear.</p>
-        )}
+        ) : (<p>Selecciona un contacto para comenzar a chatear.</p>)}
       </div>
     </div>
   );

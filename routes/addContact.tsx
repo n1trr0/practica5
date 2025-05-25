@@ -1,10 +1,5 @@
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
-
-type Contact = {
-    name: string;
-    email: string;
-    phone: string;
-};
+import FormularioContact from "../components/FormularioContact.tsx";
 
 type Data = {
     message?: string;
@@ -43,41 +38,7 @@ export const handler: Handlers<Data> = {
 };
 
 export default function AddContactPage(props: PageProps<Data>) {
-  return (
-    <div style={{ maxWidth: "400px", margin: "2rem auto", fontFamily: "sans-serif" }}>
-      <h1>Añadir contacto</h1>
-      {props.data.message && (
-        <p style={{ color: "red" }}>{props.data.message}</p>
-      )}
-      <form method="get" action="/addContact">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          required
-          style={{ width: "100%", marginBottom: "1rem", padding: "0.5rem" }}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          style={{ width: "100%", marginBottom: "1rem", padding: "0.5rem" }}
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Teléfono"
-          required
-          style={{ width: "100%", marginBottom: "1rem", padding: "0.5rem" }}
-        />
-        <button
-          type="submit"
-          className="addContact-button addContact2"
-        >
-          Añadir contacto
-        </button>
-      </form>
-    </div>
-  );
+    return (
+        <FormularioContact message={props.data.message}/>
+    );
 }
